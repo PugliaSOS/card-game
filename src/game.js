@@ -58,7 +58,7 @@ class Game {
   }
 
   doSmth(choice) {
-    const card = Number(choice);
+    const card = choice;
     rules.playCard(this, { card });
   }
 }

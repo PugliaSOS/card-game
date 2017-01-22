@@ -24,7 +24,7 @@ class Deck {
 
   pick(v = 0) {
     if (v.constructor === Card) {
-      return this.cards.splice(this.cards.indexOf(card), 1)[0];
+      return this.cards.splice(this.cards.indexOf(v), 1)[0];
     } else {
       return this.cards.splice(v, 1)[0];
     }
