@@ -11,5 +11,6 @@ game.addPlayer(new Player('Giuseppe'));
 game.on('start', shell.handleStart);
 game.on('turn', shell.handleTurn);
 game.on('hand', shell.handleHand)
+game.on('end', shell.handleEnd)
 
 game.start();

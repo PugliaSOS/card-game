@@ -14,7 +14,7 @@ const evaluatePossibilities = (game, choice) => {
     .map(c => [c]);
   if (!possibilities.length) {
     possibilities = getCombinations(game.table.cards)
-      .filter(c => c.reduce((a,b) => a.value + b.value) === choice.value)
+      .filter(c => c.reduce((a,b) => a.value + b.value, 0) === choice.value)
   }
   return possibilities;
 }
@@ -25,6 +25,10 @@ const startHand = game => {
       [...new Array(3)].forEach(_ => p.hand.add(game.deck.draw()));
     });
   }
+}
+
+const isOver = game => {
+  return game.currentPlayer.hand.isEmpty() && game.deck.isEmpty();
 }
 
 const startGame = game => {
@@ -49,4 +53,4 @@ const playCard = (game, choice) => {
 
 const startTurn = game => {}
 
-module.exports = { startTurn, startGame, startHand, playCard, getCombinations };
+module.exports = { startTurn, startGame, startHand, playCard, getCombinations, isOver };

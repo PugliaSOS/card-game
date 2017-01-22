@@ -31,14 +31,24 @@ class Game {
   }
 
   startHand() {
+    if (rules.isOver(this)) {
+      return this.end();
+    }
     this.fire('hand');
     rules.startHand(this);
     this.startTurn();
   }
 
   startTurn() {
+    if (rules.isOver(this)) {
+      return this.end();
+    }
     rules.startTurn(this);
     this.fire('turn');
+  }
+
+  end() {
+    this.fire('end');
   }
 
   move(choice) {
