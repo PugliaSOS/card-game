@@ -1,7 +1,12 @@
 class Card {
-    toString() {
-        return Math.round(Math.random() * 100);
-    }
+  constructor(value, seed) {
+    this.seed = seed;
+    this.value = value;
+  }
+
+  toString() {
+    return this.value + this.seed;
+  }
 }
 
 module.exports = Card;
