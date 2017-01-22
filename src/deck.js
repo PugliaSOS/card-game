@@ -1,7 +1,7 @@
 const Card = require('./card');
 
 class Deck {
-  constructor(set) {
+  constructor(set = []) {
     this.cards = set;
   }
 
@@ -12,6 +12,26 @@ class Deck {
       temp.push(this.cards.splice(position, 1)[0]);
     }
     this.cards = temp;
+  }
+
+  draw() {
+    return this.pick();
+  }
+
+  add(card) {
+    return this.cards.push(card);
+  }
+
+  pick(v = 0) {
+    if (v.constructor === Card) {
+      return this.cards.splice(this.cards.indexOf(card), 1)[0];
+    } else {
+      return this.cards.splice(v, 1)[0];
+    }
+  }
+
+  isEmpty() {
+    return this.cards.length === 0;
   }
 }
 
