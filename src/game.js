@@ -48,6 +48,7 @@ class Game {
   }
 
   end() {
+    rules.endMetch(this);
     this.fire('end');
   }
 

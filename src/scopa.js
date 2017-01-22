@@ -41,7 +41,6 @@ const playCard = (game, choice) => {
   const card = game.currentPlayer.hand.pick(choice.card);
   const possibilities = evaluatePossibilities(game, card);
   if (possibilities.length) {
-    console.log('possibilities: ', possibilities)
     possibilities[0].forEach(c => {
       game.currentPlayer.score.add(game.table.pick(c));
     });
@@ -51,6 +50,34 @@ const playCard = (game, choice) => {
   }
 }
 
+const getScore = (card, type) => {
+  switch (type) {
+    case 'primiera':
+      return [16, 12, 13, 14, 15, 18, 21, 10, 10, 10][card.value - 1];
+    case 'denari':
+      return card.seed === 'D' ? 1 : 0;
+    case 'settebello':
+      return (card.seed === 'D' & card.value === 7) * 1;
+  }
+  return 1;
+}
+
+const endMetch = game => {
+  ['lunga', 'primiera', 'denari', 'settebello'].forEach(t => {
+    const scores = game.players.map(p => {
+      return p.score.cards.reduce((acc, c) => acc + getScore(c, t), 0);
+    });
+    console.log(t + scores);
+
+    const maxScore = Math.max.apply(Math, scores);
+    console.log(maxScore, scores.filter(v => v === maxScore).length === 1);
+    if (scores.filter(v => v === maxScore).length === 1) {
+      game.players[scores.indexOf(maxScore)].points++;
+    }
+
+  });
+}
+
 const startTurn = game => {}
 
-module.exports = { startTurn, startGame, startHand, playCard, getCombinations, isOver };
+module.exports = { startTurn, startGame, startHand, playCard, endMetch, isOver };

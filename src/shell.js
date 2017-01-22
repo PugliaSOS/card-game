@@ -29,6 +29,7 @@ const handleTurn = (game) => {
 const handleEnd = game => {
   console.log();
   console.log('Game over');
+  game.players.forEach(p => console.log(`${p.name}'s score: ${p.points}`))
   console.log('######');
 }
 

@@ -33,6 +33,10 @@ class Deck {
   isEmpty() {
     return this.cards.length === 0;
   }
+
+  get length() {
+    return this.cards.length;
+  }
 }
 
 module.exports = Deck;

@@ -5,6 +5,7 @@ class Player {
     this.name = name;
     this.hand = new Deck();
     this.score = new Deck();
+    this.points = 0;
   }
 }
 
