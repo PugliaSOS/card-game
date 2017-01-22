@@ -12,4 +12,4 @@ game.on('start', shell.handleStart);
 game.on('turn', shell.handleTurn);
 game.on('hand', shell.handleHand)
 
-game.startGame();
+game.start();

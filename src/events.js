@@ -4,10 +4,10 @@ const on = (event, callback) => {
     handlers.push({event, callback});
 }
 
-const fire = (event, args) => {
+const fire = function(event, args) {
     handlers.forEach((h) => {
         if (h.event === event) {
-            h.callback.apply(null, args);
+            h.callback.apply(null, Array.prototype.slice.call(arguments, 1));
         }
     })
 }
