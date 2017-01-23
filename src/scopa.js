@@ -57,7 +57,7 @@ const getScore = (card, type) => {
     case 'denari':
       return card.seed === 'D' ? 1 : 0;
     case 'settebello':
-      return (card.seed === 'D' & card.value === 7) * 1;
+      return (card.seed === 'D' && card.value === 7) ? 1 : 0;
   }
   return 1;
 }
@@ -67,10 +67,8 @@ const endMetch = game => {
     const scores = game.players.map(p => {
       return p.score.cards.reduce((acc, c) => acc + getScore(c, t), 0);
     });
-    console.log(t + scores);
 
     const maxScore = Math.max.apply(Math, scores);
-    console.log(maxScore, scores.filter(v => v === maxScore).length === 1);
     if (scores.filter(v => v === maxScore).length === 1) {
       game.players[scores.indexOf(maxScore)].points++;
     }

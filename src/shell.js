@@ -11,6 +11,8 @@ const handleHand = (game) => {
 }
 
 const handleTurn = (game) => {
+  const getCard = index => game.currentPlayer.hand.cards[index - 1];
+
   console.log();
   console.log(`## Now is ${game.currentPlayer.name}'s turn`);
   console.log('The following cards are on the table:');
@@ -18,12 +20,13 @@ const handleTurn = (game) => {
   console.log('The following cards are in your hand:');
   console.log(game.currentPlayer.hand.cards.map(c => c.toString()));
   console.log('Which card do you choose? (Give index)');
+  
   // read({
   //   prompt: '>'
   // }, (err, choice) => {
   //   game.move(Number(choice - 1));
   // })
-  game.move(0);
+  game.move(getCard(1));
 }
 
 const handleEnd = game => {
