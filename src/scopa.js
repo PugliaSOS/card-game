@@ -63,7 +63,7 @@ const getScore = (card, type) => {
 }
 
 const endMetch = game => {
-  ['lunga', 'primiera', 'denari', 'settebello'].forEach(t => {
+  ['lunga', 'denari', 'settebello'].forEach(t => {
     const scores = game.players.map(p => {
       return p.score.cards.reduce((acc, c) => acc + getScore(c, t), 0);
     });
@@ -72,8 +72,25 @@ const endMetch = game => {
     if (scores.filter(v => v === maxScore).length === 1) {
       game.players[scores.indexOf(maxScore)].points++;
     }
-
   });
+
+  // Primiera
+  const primieraScores = game.players.map(p => {
+    return 'DCSB'.split('')
+      .map(seed => {
+        return Math.max.apply(
+          null,
+          p.score.cards
+            .filter(c => c.seed === seed)
+            .map(c => getScore(c, 'primiera'))
+        );
+      })
+      .reduce((a, b) => a + b, 0);
+  });
+  const primieraMaxScore = Math.max.apply(Math, primieraScores);
+  if (primieraScores.filter(v => v === primieraMaxScore).length === 1) {
+    game.players[primieraMaxScore.indexOf(primieraMaxScore)].points++;
+  }
 }
 
 const startTurn = game => {}
