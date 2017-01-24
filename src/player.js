@@ -6,6 +6,7 @@ class Player {
     this.hand = new Deck();
     this.score = new Deck();
     this.points = 0;
+    this.scopa = 0;
   }
 }
 

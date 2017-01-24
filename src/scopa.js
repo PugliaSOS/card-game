@@ -45,6 +45,11 @@ const playCard = (game, choice) => {
       game.currentPlayer.score.add(game.table.pick(c));
     });
     game.currentPlayer.score.add(choice.card);
+
+    if (game.table.isEmpty() && !game.deck.isEmpty()) {
+      game.currentPlayer.scopa++;
+    }
+
   } else {
     game.table.add(card);
   }
@@ -89,8 +94,11 @@ const endMetch = game => {
   });
   const primieraMaxScore = Math.max.apply(Math, primieraScores);
   if (primieraScores.filter(v => v === primieraMaxScore).length === 1) {
-    game.players[primieraMaxScore.indexOf(primieraMaxScore)].points++;
+    game.players[primieraScores.indexOf(primieraMaxScore)].points++;
   }
+
+  // Scopa
+  game.players.forEach(p => p.points += p.scopa)
 }
 
 const startTurn = game => {}
