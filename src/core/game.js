@@ -24,7 +24,7 @@ class Game {
 
   startGame() {
     this.fire('start');
-    rules.startGame(this);
+    this.rules.startGame(this);
     this.startHand();
   }
 
