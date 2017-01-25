@@ -1,4 +1,4 @@
-const Card = require('./card');
+const Card = require('../core/card');
 const naples = [];
 
 'DCSB'.split('').forEach(s => {

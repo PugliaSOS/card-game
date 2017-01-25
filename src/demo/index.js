@@ -1,6 +1,6 @@
-const Game = require('./game');
-const Player = require('./player');
-const shell = require('./shell');
+const Game = require('../core/game');
+const Player = require('../core/player');
+const shell = require('./utils/shell');
 
 const game = new Game();
 

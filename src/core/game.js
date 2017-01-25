@@ -1,7 +1,7 @@
 const events = require('./events');
 const Deck = require('./deck');
-const sets = require('./sets');
-const rules = require('./scopa');
+const sets = require('../games/sets');
+const rules = require('../games/scopa');
 
 class Game {
   constructor() {
