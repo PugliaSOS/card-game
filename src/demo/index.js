@@ -1,8 +1,10 @@
 const Game = require('../core/game');
 const Player = require('../core/player');
 const shell = require('./utils/shell');
+const sets = require('../games/sets');
+const rules = require('../games/scopa');
 
-const game = new Game();
+const game = new Game(rules, sets);
 
 game.addPlayer(new Player('Mario'));
 game.addPlayer(new Player('Nicola'));

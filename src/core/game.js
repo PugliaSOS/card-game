@@ -1,10 +1,8 @@
 const events = require('./events');
 const Deck = require('./deck');
-const sets = require('../games/sets');
-const rules = require('../games/scopa');
 
 class Game {
-  constructor() {
+  constructor(sets, rules) {
     this.direction = 1;
     this.turn = 0;
     this.hand = 0;
@@ -12,7 +10,7 @@ class Game {
     this.table = new Deck();
     this.deck = new Deck(sets.naples);
     this.on = events.on;
-
+    this.rules = rules;
     this.start = this.startGame;
   }
 
@@ -31,7 +29,7 @@ class Game {
   }
 
   startHand() {
-    if (rules.isOver(this)) {
+    if (this.rules.isOver(this)) {
       return this.end();
     }
     this.fire('hand');
@@ -40,15 +38,15 @@ class Game {
   }
 
   startTurn() {
-    if (rules.isOver(this)) {
+    if (this.rules.isOver(this)) {
       return this.end();
     }
-    rules.startTurn(this);
+    this.rules.startTurn(this);
     this.fire('turn');
   }
 
   end() {
-    rules.endMetch(this);
+    this.rules.endMetch(this);
     this.fire('end');
   }
 
@@ -70,7 +68,7 @@ class Game {
 
   doSmth(choice) {
     const card = choice;
-    rules.playCard(this, { card });
+    this.rules.playCard(this, { card });
   }
 }
 
