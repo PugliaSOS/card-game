@@ -33,7 +33,7 @@ class Game {
       return this.end();
     }
     this.fire('hand');
-    rules.startHand(this);
+    this.rules.startHand(this);
     this.startTurn();
   }
 

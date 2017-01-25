@@ -4,7 +4,7 @@ const shell = require('./utils/shell');
 const sets = require('../games/sets');
 const rules = require('../games/scopa');
 
-const game = new Game(rules, sets);
+const game = new Game(sets, rules);
 
 game.addPlayer(new Player('Mario'));
 game.addPlayer(new Player('Nicola'));
