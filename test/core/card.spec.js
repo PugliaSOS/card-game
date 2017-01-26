@@ -1,6 +1,6 @@
-const expect = require('./helper').expect;
+const expect = require('./../helper').expect;
 
-const Card = require('../src/core/card');
+const Card = require('./../../src/core/card');
 
 describe('Card', () => {
   beforeEach(() => {
