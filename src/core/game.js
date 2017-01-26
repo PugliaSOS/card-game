@@ -32,6 +32,7 @@ class Game {
     if (this.rules.isOver(this)) {
       return this.end();
     }
+
     this.fire('hand');
     this.rules.startHand(this);
     this.startTurn();
@@ -41,6 +42,7 @@ class Game {
     if (this.rules.isOver(this)) {
       return this.end();
     }
+
     this.rules.startTurn(this);
     this.fire('turn');
   }
@@ -52,10 +54,11 @@ class Game {
 
   move(choice) {
     this.doSmth(choice);
-    this.turn++;
+    this.turn += 1;
+
     if (this.turn >= this.players.length) {
       this.turn = 0;
-      this.hand++;
+      this.hand += 1;
       this.startHand();
     } else {
       this.startTurn();

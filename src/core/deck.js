@@ -5,7 +5,7 @@ class Deck {
     this.cards = set;
   }
 
-  mix(times) {
+  mix() {
     const temp = [];
     while (this.cards.length) {
       const position = Math.random() * this.cards.length;
@@ -25,9 +25,9 @@ class Deck {
   pick(v = 0) {
     if (v.constructor === Card) {
       return this.cards.splice(this.cards.indexOf(v), 1)[0];
-    } else {
-      return this.cards.splice(v, 1)[0];
     }
+
+    return this.cards.splice(v, 1)[0];
   }
 
   isEmpty() {
