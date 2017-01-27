@@ -6,6 +6,8 @@
         "import"
     ],
     "rules": {
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "no-plusplus": "off",
+        "default-case": "off"
     }
 }
