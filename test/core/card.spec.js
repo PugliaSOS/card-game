@@ -3,20 +3,15 @@ const expect = require('./../helper').expect;
 const Card = require('./../../src/core/card');
 
 describe('Card', () => {
-  beforeEach(() => {
-    this.card = new Card(2, 'spades');
+  const cardData = [2, 'spades'];
+  const card = new Card(...cardData);
+
+  it('initializes a new card', () => {
+    expect(card.value).to.equal(cardData[0]);
+    expect(card.seed).to.equal(cardData[1]);
   });
 
-  describe('#constructor', () => {
-    it('initializes a new card', () => {
-      expect(this.card.value).to.equal(2);
-      expect(this.card.seed).to.equal('spades');
-    });
-  });
-
-  describe('#toString', () => {
-    it('returns a string representation of card', () => {
-      expect(this.card.toString()).to.equal('2spades');
-    });
+  it('returns a string representation of card', () => {
+    expect(card.toString()).to.equal(cardData.join(''));
   });
 });
