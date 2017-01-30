@@ -1,4 +1,4 @@
-const expect = require('./../helper').expect;
+const expect = require('chai').expect;
 
 const Card = require('./../../src/core/card');
 

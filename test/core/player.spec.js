@@ -1,6 +1,6 @@
 const path = require('path');
 
-const expect = require('./../helper').expect;
+const expect = require('chai').expect;
 
 const Player = require('./../../src/core/player');
 
