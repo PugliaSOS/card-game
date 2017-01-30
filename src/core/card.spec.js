@@ -17,4 +17,11 @@ describe('Card', () => {
 
     expect(card.toString()).to.equal('3spades');
   });
+
+  it('takes only the first two arguments', () => {
+    const cardData = [3, 'coins', 'spades', 'clubs'];
+    const card = new Card(...cardData);
+
+    expect(card.toString()).to.equal('3coins');
+  });
 });
