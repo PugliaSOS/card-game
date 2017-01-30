@@ -75,18 +75,15 @@ const endMetch = (game) => {
   });
 
   // Primiera
-  const primieraScores = game.players.map(p => (
-    'DCSB'.split('')
-      .map(seed => (
-        Math.max.apply(
-          null,
-          p.score.cards
-            .filter(c => c.seed === seed)
-            .map(c => getScore(c, 'primiera')),
-        )
-      ))
-      .reduce((a, b) => a + b, 0)
-  ));
+  const primieraScores = game.players.map(player => {
+    'DCSB'.split('').map(seed => {
+        const cardsPerSeed = player.score.cards.filter(card => card.seed === seed);
+        const cardsScore = cardsPerSeed.map(card => getScore(card, 'primiera'));
+
+        Math.max.apply(null, cardsScore)
+    }).reduce((a, b) => a + b, 0);
+  });
+
   const primieraMaxScore = Math.max(...primieraScores);
   if (primieraScores.filter(v => v === primieraMaxScore).length === 1) {
     game.players[primieraScores.indexOf(primieraMaxScore)].points++;

@@ -7,7 +7,7 @@ const on = (event, callback) => {
 const fire = (event, ...args) => {
   handlers.forEach((handler) => {
     if (handler.event === event) {
-      handler.callback.apply(args);
+      handler.callback(...args);
     }
   });
 };
