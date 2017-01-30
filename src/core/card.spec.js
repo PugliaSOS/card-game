@@ -3,8 +3,12 @@ const expect = require('chai').expect;
 const Card = require('./card');
 
 describe('Card', () => {
-  const cardData = [2, 'spades'];
-  const card = new Card(...cardData);
+  let cardData, card;
+
+  beforeEach(() => {
+    cardData = [2, 'spades'];
+    card = new Card(...cardData);
+  });
 
   it('initializes a new card', () => {
     expect(card.value).to.equal(cardData[0]);
