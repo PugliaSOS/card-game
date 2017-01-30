@@ -4,24 +4,19 @@ const Card = require('./card');
 
 describe('Card', () => {
   it('initializes a new card', () => {
-    const cardData = [2, 'spades'];
-    const card = new Card(...cardData);
+    const card = new Card(2, 'spades');
 
-    expect(card.value).to.equal(cardData[0]);
-    expect(card.seed).to.equal(cardData[1]);
+    expect(card.value).to.equal(2);
+    expect(card.seed).to.equal('spades');
   });
 
   it('returns a string representation of card', () => {
-    const cardData = [3, 'spades'];
-    const card = new Card(...cardData);
-
+    const card = new Card(3, 'spades');
     expect(card.toString()).to.equal('3spades');
   });
 
   it('takes only the first two arguments', () => {
-    const cardData = [3, 'coins', 'spades', 'clubs'];
-    const card = new Card(...cardData);
-
+    const card = new Card(3, 'coins', 'spades', 'clubs');
     expect(card.toString()).to.equal('3coins');
   });
 });
