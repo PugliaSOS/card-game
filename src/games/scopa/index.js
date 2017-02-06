@@ -29,13 +29,19 @@ const startHand = (game) => {
 
 const isOver = game => game.currentPlayer.hand.isEmpty() && game.deck.isEmpty();
 
-const startGame = (game) => {
+const startGame = (targetGame) => {
+  const game = targetGame;
+
   game.deck.mix();
   startHand(game);
   [...new Array(4)].forEach(() => game.table.add(game.deck.draw()));
+
+  return game;
 };
 
-const playCard = (game, choice) => {
+const playCard = (targetGame, choice) => {
+  const game = targetGame;
+
   const card = game.currentPlayer.hand.pick(choice.card);
   const possibilities = evaluatePossibilities(game, card);
   if (possibilities.length) {
@@ -48,6 +54,8 @@ const playCard = (game, choice) => {
   } else {
     game.table.add(card);
   }
+
+  return game;
 };
 
 const getScore = (card, type) => {
@@ -59,10 +67,13 @@ const getScore = (card, type) => {
     case 'settebello':
       return (card.seed === 'D' && card.value === 7) ? 1 : 0;
   }
+
   return 1;
 };
 
-const endMetch = (game) => {
+const endMetch = (targetGame) => {
+  const game = targetGame;
+
   ['lunga', 'denari', 'settebello'].forEach((t) => {
     const scores = game.players.map(p => (
       p.score.cards.reduce((acc, c) => acc + getScore(c, t), 0)
@@ -75,13 +86,13 @@ const endMetch = (game) => {
   });
 
   // Primiera
-  const primieraScores = game.players.map(player => {
-    'DCSB'.split('').map(seed => {
-        const cardsPerSeed = player.score.cards.filter(card => card.seed === seed);
-        const cardsScore = cardsPerSeed.map(card => getScore(card, 'primiera'));
+  const primieraScores = game.players.map((player) => {
+    return 'DCSB'.split('').map((seed) => {
+      const cardsPerSeed = player.score.cards.filter((card) => { return card.seed === seed; });
+      const cardsScore = cardsPerSeed.map((card) => { return getScore(card, 'primiera'); });
 
-        Math.max.apply(null, cardsScore)
-    }).reduce((a, b) => a + b, 0);
+      return Math.max.apply(null, cardsScore);
+    }).reduce((a, b) => { return a + b; }, 0);
   });
 
   const primieraMaxScore = Math.max(...primieraScores);
@@ -90,7 +101,9 @@ const endMetch = (game) => {
   }
 
   // Scopa
-  game.players.forEach(p => p.points += p.scopa);
+  game.players.forEach((p) => { p.points += p.scopa; });
+
+  return game;
 };
 
 const startTurn = () => {};
