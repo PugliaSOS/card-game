@@ -24,13 +24,17 @@ class Scopa extends Game {
     return possibilities;
   }
 
-  startHand() {
+  prepareHand() {
+    if (this.isOver()) return;
     if (this.currentPlayer.hand.isEmpty()) {
       this.players.forEach((p) => {
         [...new Array(3)].forEach(() => p.hand.add(this.deck.draw()));
       });
     }
+  }
 
+  startHand() {
+    this.prepareHand();
     super.startHand();
   }
 
@@ -40,11 +44,12 @@ class Scopa extends Game {
 
   startGame() {
     this.deck.mix();
-    this.startHand();
+    this.prepareHand();
 
     [...new Array(4)].forEach(() => this.table.add(this.deck.draw()));
 
     super.startGame();
+
     return this;
   }
 
