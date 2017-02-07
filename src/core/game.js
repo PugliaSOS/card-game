@@ -2,7 +2,7 @@ const events = require('./events');
 const Deck = require('./deck');
 
 class Game {
-  constructor(sets, rules) {
+  constructor(sets)  {
     this.direction = 1;
     this.turn = 0;
     this.hand = 0;
@@ -10,7 +10,6 @@ class Game {
     this.table = new Deck();
     this.deck = new Deck(sets.naples);
     this.on = events.on;
-    this.rules = rules;
     this.start = this.startGame;
   }
 
@@ -24,31 +23,28 @@ class Game {
 
   startGame() {
     this.fire('start');
-    this.rules.startGame(this);
     this.startHand();
   }
 
   startHand() {
-    if (this.rules.isOver(this)) {
+    if (this.isOver()) {
       return this.end();
     }
 
     this.fire('hand');
-    this.rules.startHand(this);
     this.startTurn();
   }
 
   startTurn() {
-    if (this.rules.isOver(this)) {
+    if (this.isOver()) {
       return this.end();
     }
 
-    this.rules.startTurn(this);
     this.fire('turn');
   }
 
   end() {
-    this.rules.endMetch(this);
+    this.endMetch();
     this.fire('end');
   }
 
@@ -71,7 +67,7 @@ class Game {
 
   doSmth(choice) {
     const card = choice;
-    this.rules.playCard(this, { card });
+    this.playCard({ card });
   }
 }
 
