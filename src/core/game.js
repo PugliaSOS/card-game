@@ -2,7 +2,7 @@ const events = require('./events');
 const Deck = require('./deck');
 
 class Game {
-  constructor(sets)  {
+  constructor(sets) {
     this.direction = 1;
     this.turn = 0;
     this.hand = 0;

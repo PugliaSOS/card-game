@@ -66,7 +66,7 @@ class Scopa extends Game {
     return this;
   }
 
-  getScore(card, type) {
+  static getScore(card, type) {
     switch (type) {
       case 'primiera':
         return [16, 12, 13, 14, 15, 18, 21, 10, 10, 10][card.value - 1];
@@ -82,24 +82,22 @@ class Scopa extends Game {
   endMetch() {
     ['lunga', 'denari', 'settebello'].forEach((t) => {
       const scores = this.players.map(p => (
-        p.score.cards.reduce((acc, c) => acc + getScore(c, t), 0)
+        p.score.cards.reduce((acc, c) => acc + this.getScore(c, t), 0)
       ));
 
       const maxScore = Math.max(...scores);
-        if (scores.filter(v => v === maxScore).length === 1) {
-          this.players[scores.indexOf(maxScore)].points++;
-        }
+      if (scores.filter(v => v === maxScore).length === 1) {
+        this.players[scores.indexOf(maxScore)].points++;
+      }
     });
 
     // Primiera
-    const primieraScores = this.players.map((player) => {
-      return 'DCSB'.split('').map((seed) => {
-        const cardsPerSeed = player.score.cards.filter((card) => { return card.seed === seed; });
-        const cardsScore = cardsPerSeed.map((card) => { return getScore(card, 'primiera'); });
+    const primieraScores = this.players.map(player => 'DCSB'.split('').map((seed) => {
+      const cardsPerSeed = player.score.cards.filter(card => card.seed === seed);
+      const cardsScore = cardsPerSeed.map(card => this.getScore(card, 'primiera'));
 
-        return Math.max.apply(null, cardsScore);
-      }).reduce((a, b) => { return a + b; }, 0);
-    });
+      return Math.max.apply(null, cardsScore);
+    }).reduce((a, b) => a + b, 0));
 
     const primieraMaxScore = Math.max(...primieraScores);
     if (primieraScores.filter(v => v === primieraMaxScore).length === 1) {
@@ -107,7 +105,7 @@ class Scopa extends Game {
     }
 
     // Scopa
-    this.players.forEach((p) => { p.points += p.scopa; });
+    this.players.forEach(player => player.points + player.scopa);
 
     return this;
   }
