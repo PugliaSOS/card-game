@@ -10,7 +10,6 @@ class Game {
     this.table = new Deck();
     this.deck = new Deck(sets.naples);
     this.on = events.on;
-    this.start = this.startGame;
   }
 
   addPlayer(player) {
@@ -21,7 +20,7 @@ class Game {
     return this.players[this.turn];
   }
 
-  startGame() {
+  tartGame() {
     this.fire('start');
     this.startHand();
   }
