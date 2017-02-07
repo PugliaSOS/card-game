@@ -20,7 +20,7 @@ class Game {
     return this.players[this.turn];
   }
 
-  tartGame() {
+  startGame() {
     this.fire('start');
     this.startHand();
   }
