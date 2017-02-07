@@ -71,7 +71,7 @@ class Scopa extends Game {
     return this;
   }
 
-  static getScore(card, type) {
+  getScore(card, type) {
     switch (type) {
       case 'primiera':
         return [16, 12, 13, 14, 15, 18, 21, 10, 10, 10][card.value - 1];
