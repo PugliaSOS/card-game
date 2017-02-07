@@ -19,7 +19,7 @@ const handleTurn = (game) => {
   console.log('The following cards are on the table:');
   console.log(game.table.cards.map(c => c.toString()));
   console.log('The following cards are in your hand:');
-  console.log(game.currentPlayer.hand.cards.map(c => c.toString()));
+  console.log(game.currentPlayer.hand.cards.map(card => card.toString()));
   console.log('Which card do you choose? (Give index)');
 
   // read({
