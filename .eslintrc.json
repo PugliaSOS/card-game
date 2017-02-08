@@ -8,6 +8,7 @@
     "rules": {
         "consistent-return": "off",
         "no-plusplus": "off",
-        "default-case": "off"
+        "default-case": "off",
+        "class-methods-use-this": "off"
     }
 }
