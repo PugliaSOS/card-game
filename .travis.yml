@@ -9,5 +9,5 @@ node_js:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 script:
-  - eslint */*.js
-  - istanbul cover mocha && codecov
+  - npm run lint
+  - istanbul cover npm run test && codecov
